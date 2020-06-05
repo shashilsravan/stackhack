@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x0j(#ywhne4^ni2u8ow)spy95-@x#$aha0bn#f0$lhg6u+^qm0'
+SECRET_KEY = 'e8bf99c1345678a041e1370aea79deb224f9901917baeaa9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -129,22 +129,22 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'blog-home'
+CRISPY_TEMPLATE_PACK='bootstrap4'
+LOGIN_URL='login'
+LOGIN_REDIRECT_URL='blog-home'
 
 AWS_ACCESS_KEY_ID = 'AKIARB3K7772DRDLXZ5F'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'sravan-files'
+AWS_STORAGE_BUCKET_NAME='sravan-files'
 
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sravanshashil@gmail.com'
-EMAIL_HOST_PASSWORD = 'sravan777'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT='587'
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER='sravanshashil@gmail.com'
+EMAIL_HOST_PASSWORD='sravan777'
