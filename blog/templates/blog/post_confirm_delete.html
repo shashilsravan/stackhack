@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Deleting Post</legend>
+                <h3><em>Are you sure about deleting the post "{{ object.title }}"</em></h3>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">
+                    Yeah i'm Sure
+                </button>
+                <a class="btn btn-outline-success" href="{% url 'post-detail' object.id %}" style="text-decoration:none">
+                    No i'm just kidding
+                </a>
+
+            </div>
+        </form>
+    </div>
+{% endblock content %}

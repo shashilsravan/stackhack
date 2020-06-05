@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% load extras %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.author }}'s tasks</li>
+  </ol>
+</nav>
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <h3 class="article-title text-center">Task name: {{ object.title }}</h3>
+                <h6 class="mt-2 text-center"><i class="fa fa-clock-o"></i> Created on: {{ object.date_posted|date:"F d, Y" }}</h6>
+                {% if object.author == user %}
+                <div>
+                    <a class="text-center ml-3 badge badge-info p-3 mt-1 mb-2" href="{% url 'user-posts' post.tag %}"style="color:white;"><i class="fa fa-tag"></i> {{ post.tag }}</a>
+                       <a class="float-right ml-3 badge badge-danger p-3 mt-2 mb-1" href="{% url 'post-delete' object.id %}"style="color:white;">Delete Task</a>
+                    <a class="float-right badge badge-success text-wrap p-3 mt-2 mb-1" href="{% url 'post-update' object.id %}" style="color:white;">Edit Task</a>
+                    {% if post.status == 'Not Done' %}
+                    <a class="float-right disabled badge badge-warning text-wrap p-3 mt-2 mb-1 mr-4" href="#" style="color:white;">Due: {{ object.deadline| days_until }} days</a>
+                 <button class="btn btn-danger p-2 mt-2 mb-1 disabled float-left" type="submit">
+                   Deadline: {{ object.deadline|date:"F d, Y" }}
+                </button>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+                <p class="article-content mt-5">{{ object.content }}</p>
+        </div>
+        </article>
+{% endblock content %}

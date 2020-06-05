@@ -1,0 +1,545 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/datatables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/datatables2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/jquery.zmd.hierarchical-display.min.css' %}">
+    <script type="text/javascript" src="{% static 'blog/datatables.min.js' %}">
+    </script>
+
+    <script type="text/javascript" src="{% static 'blog/jquery.zmd.hierarchical-display.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/datatables-select.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/datatables-select2.min.js' %}">
+    </script>
+
+    <script type="text/javascript" src="{% static 'blog/imagesloaded.pkgd.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/directives.min.js' %}">
+    </script>
+    <script src="https://z9t4u9f6.stackpathcdn.com/wp-content/themes/mdbootstrap4/js/plugins/moment.min.js"></script>
+    <script src="https://z9t4u9f6.stackpathcdn.com/wp-content/themes/mdbootstrap4/js/plugins/fullcalendar.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'blog/jquery.zmd.hierarchical-display.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/datatables2.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/jquery.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'blog/jquery.js' %}">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+    </script>
+    <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    {% if title %}
+        <title>Blog's {{ title }}</title>
+    {% else %}
+        <title>To Do Planner</title>
+    {% endif %}
+    <link href='https://fonts.googleapis.com/css?family=Alegreya' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <style>
+    :root {
+  --bc: #0c0c0d;
+  --bc-gray: #0e0d10;
+  --bc-purple: #f2e1f7;
+  --bc-purple-darker: #1d1823;
+  --bc-nav-foot: #141017;
+  --white: #ffffff;
+  --black: #000000;
+  --dark-blue: #1f2029;
+  --extra-dark-blue: #13141a;
+  --dark-light: #424455;
+  --red: #da2c4d;
+  --dark-red: #6e1727;
+  --yellow: #f8ab37;
+  --grey: #ecedf3;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --orange: #fd7e14;
+  --green: #28a745;
+  --light-green: #24e33a;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --gray: #6c757d;
+  --primary: skyblue;
+  --secondary: #7015b3;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --light-mode: #fcf2ff;
+  --light-mode-brig: #fdf7ff;
+  --light-mode-darker: #f2e1f7;
+  --dark: #343a40;
+    }
+    main {
+    min-height: 100vh;
+    }
+    .shadow {
+        box-shadow: 16px 4px 64px rgba(252, 242, 255, 0.3), -16px -16px 40px rgba(252, 242, 255, 0.8), inset -8px -6px 80px rgba(252, 242, 255, 0.18);
+      }
+      .user-header-wrapper {
+        margin: 8vh 0 0 0;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .user-icon-wrapper {
+        bottom: -25%;
+        border-radius: 50%;
+        border: 8px solid var(--light-mode);
+        background-color: var(--light-mode);
+        position: absolute;
+        z-index: 10;
+      }
+      .typing-text {
+          display:none;
+          margin: 0;
+            width: 59ch;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 5px solid rgba(0, 255, 0, 0.5);
+            animation: typing 6s steps(59),
+                       caret 1s steps(1) infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+        }
+
+        @keyframes caret {
+            50% { border-right-color: transparent; }
+        }
+      .code{
+        transition: color 0.3s ease-in;
+        color:#fcf2ff;
+      }
+      .username-wrapper:hover .code{
+        color:black;
+      }
+      .user-icon {
+        border-radius: 50%;
+        display: block;
+        width: 225px;
+        height: 225px;
+      }
+      .user-header-inner {
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .user-header-overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0, 0, 0, .15);
+        z-index: 6;
+      }
+      .user-header {
+        width: 100%;
+        height: 100%;
+      }
+      .user-info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .user-info-inner {
+        width: 100%;
+        padding: 8em 0 0 0;
+        background-color: var(--light-mode);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .username-wrapper {
+          position: relative;
+      }
+      .username {
+          margin: 0;
+          display: inline-block;
+          color: var(--bc-darker);
+          font-size: 2em;
+          cursor: default;
+      }
+      .uname-verified {
+          width: 25px;
+          height: auto;
+          cursor: default;
+      }
+      .verified {
+          width: 100%;
+          color: var(--white);
+          background-color: var(--black);
+          font-family: "Roboto";
+          text-transform: uppercase;
+          letter-spacing: .15em;
+          font-weight: 900;
+          text-align: center;
+          border-radius: 5px;
+          font-size: 1em;
+          padding: .25em;
+          position: absolute;
+          pointer-events: none;
+          top: 150%;
+          left: 0;
+          opacity: 0;
+          transition: all .5s cubic-bezier(.175,.885,.32,1.275);
+      }
+      .verified p {
+        margin: .8em;
+      }
+      .verified::before {
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          transform: rotateZ(-90deg);
+          border-top: 12px solid transparent;
+          border-bottom: 12px solid transparent;
+          border-left: 12px solid var(--black);
+          position: absolute;
+          top: -15px;
+          left: 50%;
+      }
+    body {
+            font-family: Poppins;
+            font-size: 18px;
+            background: linear-gradient(-90deg, #dae2f8 20%, #d6a4a4 80%);
+        }
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0yLjUgMEwxIDEuNSAzLjUgNCAxIDYuNSAyLjUgOGw0LTQtNC00eiIgZmlsbD0iY3VycmVudENvbG9yIi8+PC9zdmc+);
+        }
+        .mine{
+            max-width:800px;
+              margin: 0 auto;
+              border-top: 5px solid #435757;
+              background-color: rgba(255, 255, 255, .2);
+              box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+              user-select: none;
+        }
+        @media (max-width: 767px) {
+  #navbar {
+    grid-template-columns: 1fr 20% 70% 1fr;
+  }
+  .user-info-inner {
+    padding: 5em 0 0 0;
+  }
+  .user-icon-wrapper {
+    bottom: -40%;
+  }
+  .user-icon {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 560px) {
+  #navbar {
+    grid-template-columns: 1fr 85% 0% 1fr;
+  }
+  #navbar-items {
+    display: none;
+  }
+  .user-info-inner {
+    padding: 4em 0 0 0;
+  }
+  .footer-link {
+    display: block;
+    margin: 1em 0 1em 0;
+  }
+}
+                .container1{
+                display: flex;
+                flex-direction: column;
+                border:2px solid  rgb(5, 90, 129);
+                border-radius: 20px;
+                box-shadow:20px 10px 30px rgba(0,0,0,0.23),0 10px 6px rgba(0,0,0,0.23);
+                margin: 20px;
+            }
+            .container2{
+                display: flex;
+                flex-direction: column;
+                border:2px solid rgb(5, 90, 129);
+                border-radius: 20px;
+                box-shadow:20px 10px 30px rgba(0,0,0,0.23),0 10px 6px rgba(0,0,0,0.23);
+                margin: 20px;
+            }
+            .container1 .about1,.container2 .about2{
+                border: 2px solid white;
+                margin: 10px;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            .container1 .pic1,.container2 .pic2{
+                margin-top: 40px;
+                margin-left:40px;
+                margin-right:40px;
+                margin-bottom:20px;
+            }
+            .pic1 img,.pic2 img{
+                height:200px;
+                width: 200px;
+                border-radius: 10px;
+            }
+            .container1:hover,.container2:hover{
+                transform: scale(1.02);
+            }
+            .box16{text-align:center;color:white;position:relative}
+            .box16 .box-content,.box16:after{width:100%;position:absolute;left:0}
+            .box16:after{content:"";height:100%;background:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) 69%,rgba(0,0,0,.76) 100%);top:0;transition:all .5s ease 0s}
+            .box16 .post,.box16 .title{transform:translateY(145px);transition:all .4s cubic-bezier(.13,.62,.81,.91) 0s}
+            .box16:hover:after{
+                    background:linear-gradient(to bottom,rgba(0,0,0,.01) 0,
+                    rgba(0,0,0,.09) 11%,rgba(0,0,0,.12) 13%,
+                    rgba(0,0,0,.19) 20%,rgba(0,0,0,.29) 28%,
+                    rgba(0,0,0,.29) 29%,rgba(0,0,0,.42) 38%,
+                    rgba(0,0,0,.46) 43%,rgba(0,0,0,.53) 47%,
+                    rgba(0,0,0,.75) 69%,rgba(0,0,0,.87) 84%,
+                    rgba(0,0,0,.98) 99%,rgba(0,0,0,.94) 100%)}
+            .box16 img{width:100%;height:auto}
+            .box16 .box-content{padding:20px;margin-bottom:20px;bottom:0;z-index:1}
+            .box16 .title{font-size:22px;font-weight:700;text-transform:uppercase;margin:0 0 10px}
+            .box16 .post{display:block;padding:8px 0;font-size:15px}
+            .box16 .social li a,.box17 .icon li a{border-radius:50%;font-size:20px;color:white}
+            .box16:hover .post,.box16:hover .title{transform:translateY(0)}
+            .box16 .social{list-style:none;padding:0 0 5px;margin:40px 0 25px;opacity:0;position:relative;transform:perspective(500px) rotateX(-90deg) rotateY(0) rotateZ(0);transition:all .6s cubic-bezier(0,0,.58,1) 0s}
+            .box16:hover .social{opacity:1;transform:perspective(500px) rotateX(0) rotateY(0) rotateZ(0)}
+            .box16 .social:before{content:"";width:50px;height:2px;background:#fff;margin:0 auto;position:absolute;top:-23px;left:0;right:0}
+            .box16 .social li{display:inline-block}
+            .box16 .social li a{display:block;width:40px;height:40px;line-height:40px;background:#6d3795;margin-right:10px;transition:all .3s ease 0s}
+            .box17 .icon li,.box17 .icon li a{display:inline-block}
+            .box16 .social li a:hover{background:#bea041}
+            .box16 .social li:last-child a{margin-right:0}
+            @media only screen and (max-width:990px){.box16{margin-bottom:30px}
+        }
+
+.dark-mode-toggle {
+  position: absolute;
+  z-index: 100;
+  top: 5em;
+  right: 1em;
+  color: black;
+  border: 2px solid black;
+  padding: 4px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.click-here{
+  width: 100px;
+  right: 1em;
+  position: absolute;
+  top: 7em;
+}
+    </style>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">To Do planner</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+            </div>
+            <form method="get" action="{% url 'blog-search' %}" class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" name="q" value="{{ request.GET.q }}" placeholder="search...">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    Search
+                </button>
+            </form>
+            <div class="navbar-nav view overlay">
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'post-create' %}">
+                      Add Task
+                  </a>
+                 <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+
+                {% else %}
+                  <a class="nav-item nav-link" href="{% url 'login' %}">
+                      Login
+                  </a>
+                  <a class="nav-item nav-link" href="{% url 'register' %}">
+                      Register
+                  </a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 w3-animate-bottom">
+            {% if messages %}
+                {% for message in messages %}
+<!--                    <div class="alert alert-{{ message.tags }}">-->
+<!--                        {{ message }}-->
+<!--                    </div>-->
+            <button type="button" class="btn btn-success" id="myBtn">Show Message</button>
+                  <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+                  <div class="toast-header">
+                    <img src="{{ user.profile.image.url }}" height = 40 width = 40 class="rounded mr-2" alt="">
+                    <strong class="mr-auto">Hey! {{ user }}</strong>
+                    <small></small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                    {{ message }}
+                  </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+          {% block content %}
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+              <h3 class="text-center w3-animate-top"><em>Welcome to To Do Planner</em></h3>
+              <p class='text-muted text-center'> <i class="fa fa-calendar"></i> {% now "jS F Y H:i e" %} </p>
+              <ul class="list-group w3-animate-bottom">
+                  <li class="list-group-item list-group-item-light"><a href="{% url 'archive' %}" class="text-decoration-none"><i class="fa fa-archive mr-1"></i>Archives</a></li>
+                <li class="list-group-item list-group-item-light"><a href="{% url 'post-create' %}" class="text-decoration-none"><i class="fa fa-plus"></i> Add new task</a></li>
+                <li class="list-group-item list-group-item-light"><a href="{% url 'post-table' %}" class="text-decoration-none"><i class="fa fa-bar-chart"></i> Detailed Analysis </a></li>
+                <li class="list-group-item list-group-item-light"><a href="{% url 'calendar' %}" class="text-decoration-none"><i class="fa fa-calendar-check-o"></i> Calendar </a></li>
+                <li class="list-group-item list-group-item-light"><a href="#" class="text-decoration-none" data-toggle="modal" data-target="#staticBackdrop"><i class="fa fa-sticky-note-o"></i> Guidelines </a></li>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Instructions to use To-Do planner</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <i class="fa fa-bullhorn" style="color:red"></i>
+                              <u>Hey! Here are the instructions to get started</u>
+                              <i class="fa fa-bullhorn fa-flip-horizontal" style="color:red"></i>
+                                <br><br>
+                              <i class="fa fa-check-circle-o mr-2" style="color:green"></i>
+                              Add a Task by clicking <b>Add Task</b> button <br>
+                              <i class="fa fa-check-circle-o mr-2" style="color:green"></i>
+                              Click on the task name for the task's description <br>
+                              <i class="fa fa-check-circle-o mr-2" style="color:green"></i>
+                              Click on the <b>tag name</b> to view similar tasks based on that tag <br>
+                              <i class="fa fa-check-circle-o mr-2" style="color:green"></i>
+                              Click on the <b>detailed analysis</b> for your task visualization<br>
+                              <i class="fa fa-check-circle-o mr-2" style="color:green"></i>
+                              You can change your profile info by clicking <b>settings -> Go to Profile</b> <br>
+                              <br>
+                              <i class="fa fa-trophy text-warning"></i>
+                              <i class="fa fa-trophy fa-lg text-warning"></i>
+                              <i class="fa fa-trophy text-warning mr-2"></i>
+                              <u>Our innovations</u>
+                              <i class="fa fa-trophy ml-2 text-warning"></i>
+                              <i class="fa fa-trophy fa-lg text-warning"></i>
+                              <i class="fa fa-trophy text-warning"></i>
+                              <br><br>
+                                <i class="fa fa-user-circle-o mr-2 text-secondary"></i>
+                                User Authentication made Simple<br>
+                                <i class="fa fa-pie-chart mr-2 text-success"></i>
+                                Data visualization of tasks<br>
+                                <i class="fa fa-calendar mr-2 text-danger" style="color:green"></i>
+                                A Personalized Event Calendar<br>
+                                <i class="fa fa-magic mr-2 text-info" style="color:green"></i>
+                                Personalized greetings and Simple transitions<br>
+                              <br>
+                              <i class="fa fa-laptop mr-2"></i><u> Building blocks </u><i class="fa fa-laptop ml-2"></i><br><br>
+                              <i class="fa fa-desktop mr-2"></i> Frontend:
+                              <i class="fa fa-html5 mr-2"></i>
+                              <svg class="bi bi-bootstrap-fill" width="1em" height="1.2em" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M4.002 0a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4h-8zm1.06 12h3.475c1.804 0 2.888-.908 2.888-2.396 0-1.102-.761-1.916-1.904-2.034v-.1c.832-.14 1.482-.93 1.482-1.816 0-1.3-.955-2.11-2.542-2.11H5.062V12zm1.313-4.875V4.658h1.78c.973 0 1.542.457 1.542 1.237 0 .802-.604 1.23-1.764 1.23H6.375zm0 3.762h1.898c1.184 0 1.81-.48 1.81-1.377 0-.885-.65-1.348-1.886-1.348H6.375v2.725z"/>
+                                </svg> <i class="fa fa-css3 ml-1 "></i><br>
+                              <i class="fa fa-code mr-2"></i> Backend:
+                              <i class="fab fa-python ml-2"></i>
+                              <i class="fab fa-js ml-2"></i>
+                            </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Ok, Got it</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      <p>
+                          <a class="list-group-item text-decoration-none list-group-item-light text-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-cog"></i> Settings
+                          </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+
+                          <div class="card card-body">
+                              <li class="list-group-item list-group-item-light">
+                              <a href="{% url 'profile' %}" class="text-decoration-none"><i class="fa fa-user"></i> Go to Profile</a>
+                              </li>
+                            <li class="list-group-item list-group-item-light">
+                                <a href="{% url 'password_change' %}" class="text-decoration-none"><i class="fa fa-key"></i> Change password </a>
+                            </li>
+                          </div>
+                        </div>
+                    </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+
+    </main>
+        <script>
+            $(document).ready(function(){
+              $("#myBtn").click(function(){
+                $('.toast').toast('show');
+              });
+            });
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();
+            });
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    {% for post in students %}
+        {% if post.author == user %}
+        <div class="task">
+        <article class="media content-section items">
+                <div class="media-body">
+                <div class="article-metadata">
+    <!--                <img class="rounded-circle" src="{{ post.author.profile.image.url }}" height="50" width="50">-->
+                    Tag: <a href="{% url 'user-posts' post.tag %}">{{ post.tag }}</a>
+                    &nbsp; &nbsp;
+                    Created on: <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    <button data-toggle="popover" title="deadline" data-content="This is the deadline to finish this task"
+                            data-placement="top" class="btn btn-danger btn-sm disabled float-right" type="submit">
+    <!--                    {{ today|timesince:post.deadline }}-->
+                      {{ post.deadline|date:"F d, Y" }}
+    <!--                  {{ post.author.email }}-->
+                    </button>
+                  <br><br>
+                </div>
+                    <div class="row">
+                        <div class="col-11">
+                            <h4 class="text-capitalize mt-3">
+                        Task : <a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+                        </div>
+                        <div class="col">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+        </article>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock content %}

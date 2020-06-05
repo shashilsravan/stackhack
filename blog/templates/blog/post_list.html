@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Search results</li>
+  </ol>
+</nav>
+{% for post in items %}
+{% if post.author == user %}
+{% if post.status == 'Not Done' %}
+<div class="jumbotron">
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+             Tag: <a href="{% url 'user-posts' post.tag %}"><i class="fa fa-tag"></i> {{ post.tag }}</a>
+                &nbsp; &nbsp;
+                Created on: <small class="text-muted">{{ post.date_posted|date:"F d, Y" }} <i class="fa fa-clock"></i></small>
+              <button class="btn btn-danger btn-sm disabled float-right" type="submit">
+                  <i class="fa fa-clock"></i> {{ post.deadline|date:"F d, Y" }}
+                </button><br><br>
+            </div>
+                <h3 class="text-center">
+                    <a class="article-title" href="{% url 'post-detail' post.id %}"><i class="fa fa-tasks mr-2"></i>{{ post.title }}</a></h3>
+          </div>
+        </article>
+    </div>
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% endblock content %}

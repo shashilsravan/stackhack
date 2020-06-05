@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tag based tasks</li>
+  </ol>
+</nav>
+    {% for post in posts %}
+        {% if post.author == user %}
+            {% if "/"|add:post.tag == request.path %}
+
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <div class="float-left">
+                    <h6><a href="{% url 'user-posts' post.tag %}"><i class="fa fa-tag"></i> {{ post.tag }}</a></h6>
+                    <small class="text-muted"><i class="fa fa-clock-o"></i> {{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+              <button class="btn btn-danger btn-sm disabled float-right" type="submit">
+                  {{ post.deadline|date:"F d, Y" }}
+                </button><br><br>
+            </div>
+                <h3 class="text-center text-capitalize">
+                    <a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+          </div>
+        </article>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends "blog/base.html" %}
+{% load extras %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Archives</li>
+  </ol>
+</nav>
+<div class="alert alert-success">
+    <i class="fa fa-heart mr-2"></i>
+    Hey {{ user }}! Congrats on Completing these tasks <i class="fa fa-smile-o"></i>
+</div>
+    {% for post in posts|dictsort:'deadline' %}
+        {% if post.author == user %}
+            {% if post.status == 'Done' %}
+        <div class="task">
+        <article class="media content-section items w3-animate-bottom">
+                <div class="media-body">
+                <div class="article-metadata w3-animate-right">
+                    <div class="row">
+                        <div class="col-8 d-flex justify-content-start">
+                            <h4 class="text-capitalize w3-animate-left">
+                        <button class="btn btn-success" type="button" disabled>
+                              <i class="fa fa-check"></i>
+                            </button><a class="article-title ml-2" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+                        </div>
+
+
+                    </div>
+                    <br>
+                    <div class="row d-flex justify-content-around">
+                        <ul class="list-group list-group-horizontal-sm">
+                          <li class="list-group-item">Tag: <a href="{% url 'user-posts' post.tag %}">
+                            <i class="fa fa-tag"></i> {{ post.tag }}</a></li>
+                          <li class="list-group-item">Created on: <small class="text-muted">{{ post.date_posted|date:"F d Y" }}</small>
+                          </li>
+                          <li class="list-group-item">
+                              Deadline: <small class="text-muted">
+                              {{ post.deadline|date:"F d Y" }} </small>
+                           </li>
+
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+        </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+{% endblock content %}

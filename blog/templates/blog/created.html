@@ -1,0 +1,125 @@
+{% extends "blog/base.html" %}
+{% load extras %}
+{% block content %}
+{% now "G" as current_hour %}
+{% if current_hour < '12' %}
+<div class="alert alert-success">
+    <i class="fa fa-heart mr-2"></i>
+    Hey {{ user }}! Gud Morning <i class="fa fa-sun-o"></i>
+</div>
+{% elif current_hour < '16' %}
+<div class="alert alert-warning">
+    <i class="fa fa-heart mr-2"></i>
+    Hey {{ user }}! Gud Afternoon <i class="fa fa-certificate"></i>
+</div>
+{% elif current_hour < '20' %}
+<div class="alert alert-secondary">
+    <i class="fa fa-heart mr-2"></i>
+    Hey {{ user }}! Gud Evening <i class="fa fa-cloud"></i>
+</div>
+{% else %}
+<div class="alert alert-dark bg-dark text-white">
+    <i class="fa fa-heart mr-2"></i>
+    Hey {{ user }}! Gud Night <i class="fa fa-moon-o"></i>
+</div>
+{% endif %}
+<a class="btn btn-danger mb-2" href="{% url 'blog-home' %}">
+    Sort by due
+</a>
+<a class="btn btn-success mb-2" href="{% url 'blog-home-3' %}">
+    Sort by Tag-wise
+</a>
+    {% for post in posts|dictsort:'date_posted' %}
+        {% if post.author == user %}
+        {% if post.status == 'Not Done' %}
+        <div class="task">
+        <article class="media content-section items w3-animate-bottom">
+                <div class="media-body">
+                <div class="article-metadata w3-animate-right">
+                    <div class="row">
+                        <div class="col-8 d-flex justify-content-start">
+                            <h4 class="text-capitalize w3-animate-left">
+                        <i class="fa fa-tasks" style=""></i> <a class="article-title ml-2" href="{% url 'post-detail' post.id %}">{{ post.title|truncatechars:15 }}</a></h4>
+                        </div>
+
+                            {% if post.deadline|days_until < 0 %}
+                            <div class="col-3 ml-5 w3-animate-bottom">
+                            <button class="btn btn-danger ml-5" type="button" disabled>
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                             {{ post.deadline| days_until }} days
+                            </button>
+                            </div>
+                            {% elif post.deadline|days_until < 3 %}
+                            <div class="col w3-animate-bottom">
+                                <button data-toggle="popover" title="deadline" data-content="This is the deadline to finish this task"
+                                    data-placement="top" class="btn btn-danger disabled float-right" type="submit">
+                              {{ post.deadline| days_until }} days
+            <!--                  {{ post.author.email }}-->
+                            </button>
+                            </div>
+                            {% elif post.deadline|days_until > 10 %}
+                        <div class="col w3-animate-bottom">
+                                <button data-toggle="popover" title="deadline" data-content="This is the deadline to finish this task"
+                                    data-placement="top" class="btn btn-success disabled float-right" type="submit">
+            <!--                    {{ today|timesince:post.deadline }}-->
+                              {{ post.deadline| days_until }} days
+            <!--                  {{ post.author.email }}-->
+                            </button>
+                        </div>
+                            {% else %}
+                        <div class="col">
+                                <button data-toggle="popover" title="deadline" data-content="This is the deadline to finish this task"
+                                    data-placement="top" class="btn btn-warning disabled float-right" type="submit">
+                              {{ post.deadline| days_until }} days
+                            </button>
+                        </div>
+                            {% endif %}
+                    </div>
+                    <br>
+                    <div class="row d-flex justify-content-around">
+                        <ul class="list-group list-group-horizontal-sm">
+                          <li class="list-group-item">Tag: <a href="{% url 'user-posts' post.tag %}">
+                            <i class="fa fa-tag"></i> {{ post.tag }}</a></li>
+                          <li class="list-group-item">Created on: <small class="text-muted">{{ post.date_posted|date:"F d Y" }}</small>
+                          </li>
+                          <li class="list-group-item">
+                              Deadline: <small class="text-muted">
+                              {{ post.deadline|date:"F d Y" }} </small>
+                           </li>
+
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+
+        </article>
+        </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+
+
+{% endblock content %}
+<!--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>-->
+<!--        <script>-->
+<!--          new Darkmode().showWidget();-->
+<!--        </script>-->
+<!--        <script>-->
+<!--          var options = {-->
+<!--              bottom: '64px', // default: '32px'-->
+<!--              right: 'unset', // default: '32px'-->
+<!--              left: '32px', // default: 'unset'-->
+<!--              time: '0.5s', // default: '0.3s'-->
+<!--              mixColor: '#fff', // default: '#fff'-->
+<!--              backgroundColor: '#fff',  // default: '#fff'-->
+<!--              buttonColorDark: '#100f2c',  // default: '#100f2c'-->
+<!--              buttonColorLight: '#fff', // default: '#fff'-->
+<!--              saveInCookies: false, // default: true,-->
+<!--              label: '🌓', // default: ''-->
+<!--              autoMatchOsTheme: true // default: true-->
+<!--            }-->
+
+<!--        const darkmode = new Darkmode(options);-->
+<!--        darkmode.showWidget();-->
+<!--        </script>-->

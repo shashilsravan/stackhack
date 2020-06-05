@@ -1,0 +1,56 @@
+
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
+<main id="main" class="noheader" style="margin-top:-40px">
+  <div class="user-header-wrapper">
+      <div class="user-icon-wrapper shadow">
+          <img class="user-icon" src="{{ user.profile.image.url }}" alt="">
+      </div>
+      <div class="user-header-inner">
+          <div class="user-header-overlay"></div>
+          <img class="user-header" src="https://i.imgur.com/2DEY9G1.jpg" alt="">
+      </div>
+  </div>
+  <div class="user-info" style="margin-top:-110px">
+      <div class="user-info-inner">
+          <div class="username-wrapper">
+              <br><br><br>
+
+              <h5 class="w3-animate-zoom project-title username">
+                  <span class="code">&lt;</span>
+                          {{ user.username }}
+
+              <svg class="uname-verified" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.03 1326.16">
+                  <defs><style>.cls-11{fill:var(--primary);}.cls-12{fill:#ffffff;}</style></defs><title>verified</title>
+                  <g id="Layer_3">
+                  <polygon class="cls-11" points="0 747.37 120.83 569.85 70.11 355.04 283.43 292.38 307.3 107.41 554.93 107.41 693.66 0 862.23 120.83 1072.57 126.8 1112.84 319.23 1293.35 399.79 1256.05 614.6 1350.03 793.61 1197.87 941.29 1202.35 1147.15 969.64 1178.48 868.2 1326.16 675.02 1235.17 493.77 1315.72 354.99 1133.73 165.58 1123.29 152.16 878.64 0 747.37"/></g>
+                  <g id="Layer_2">
+                  <path class="cls-12" d="M755.33,979.23s125.85,78.43,165.06,114c34.93-36,234.37-277.22,308.24-331.94,54.71,21.89,85,73.4,93,80.25-3.64,21.89-321.91,418.58-368.42,445.94-32.74-3.84-259-195.16-275.4-217C689.67,1049.45,725.24,1003.85,755.33,979.23Z" transform="translate(-322.83 -335.95)"/></g>
+              </svg>
+              <span class="code">/&gt;</span>
+                  </h5>
+          </div>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group p-4">
+                <h4 class="hov border-bottom mb-2 w3-animate-top"> Profile Info </h4>
+                <div class="w3-animate-right">{{ u_form|crispy }}</div>
+                <hr>
+                <div class="w3-animate-left">{{ p_form|crispy }}</div>
+                <button class="w3-animate-bottom btn btn-outline-info" type="submit">
+                    Update Profile
+                </button>
+            </div>
+        </form>
+      </div>
+  </div>
+</main>
+{% endblock content %}
