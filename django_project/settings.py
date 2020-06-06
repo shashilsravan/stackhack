@@ -134,14 +134,6 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 LOGIN_URL='login'
 LOGIN_REDIRECT_URL='blog-home'
 
-AWS_ACCESS_KEY_ID = 'AKIARB3K7772DRDLXZ5F'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME='sravan-files'
-
-AWS_S3_FILE_OVERWRITE=False
-AWS_DEFAULT_ACL=None
-DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
-
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
