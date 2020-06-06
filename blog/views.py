@@ -10,15 +10,17 @@ import datetime
 from calendar import monthrange
 from django.http import HttpResponse
 from .tasks import send_email_task
-#
-# def mail(request):
-#     posts = Post.objects.all()
-#     for post in posts:
-#         delta = datetime.datetime.date(post.deadline) \
-#                 - datetime.datetime.now().date()
-#         if delta.days <= 0:
-#             send_email_task(post.title, post.content, post.author.email)
-#     return HttpResponse('<h1>Email is SENT</h1>')
+from django.core.mail import send_mail
+
+def mail(request):
+    if request.method == 'POST':
+        message = request.POST['message']
+        send_mail('Contact Form',
+                  message,
+                  settings.EMAIL_HOST_USER,
+                  ['shashilsravan.ss.ss@gmail.com'],
+                  fail_silently=False)
+    return render(request, 'blog/mail.html')
 
 def home(request):
     context = {

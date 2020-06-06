@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Mail us</li>
+  </ol>
+</nav>
+<div class="alert alert-light" role="alert">
+  After clicking a mail will be sent to us! So don't spam <i class="fa fa-smile-o"></i>
+</div>
+<form method="post" action="{% url 'index' %}">
+	{% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-share"></i></div>
+        </div>
+        <textarea class="form form-control form-control-lg" name="message" placeholder="Enter message content..."></textarea>
+	</div>
+	<input class="btn btn-primary" type="submit" />
+</form>
+{% endblock content %}
