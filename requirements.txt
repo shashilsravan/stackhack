@@ -6,7 +6,7 @@ chardet==3.0.4
 cssselect==1.0.1
 cssselect2==0.2.0
 dj-database-url==0.5.0
-Django==3.0.5
+Django==3.1.6
 django-celery==3.3.1
 django-core==1.4.1
 django-crispy-forms==1.9.0
